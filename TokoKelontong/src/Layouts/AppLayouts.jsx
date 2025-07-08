@@ -1,3 +1,4 @@
+import Footer from "../Components/Footer";
 import Navbar from "../Components/Navbar";
 import { Outlet } from "react-router-dom";
 export default function AppLayouts() {
@@ -5,6 +6,7 @@ export default function AppLayouts() {
     <>
       <Navbar />
       <Outlet />
+      <Footer/>
     </>
   );
 }

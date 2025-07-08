@@ -1,0 +1,1 @@
+Hello aku natz dan ini adalah big project untuk menampung segala portofolio dan lain lain dari saya hehe

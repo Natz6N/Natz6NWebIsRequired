@@ -1,12 +1,30 @@
-# React + Vite
+# How to use badge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+```
+// Basic usage
+<Badge variant="primary">Primary</Badge>
+<Badge variant="success" dot>Online</Badge>
+<Badge variant="warning" removable onRemove={handleRemove}>
+  Removable
+</Badge>
 
-Currently, two official plugins are available:
+// Notification badge
+<NotificationBadge count={5} />
+<NotificationBadge count={150} max={99} />
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+// Status badge
+<StatusBadge status="online" />
+<StatusBadge status="pending" />
 
-## Expanding the ESLint configuration
+// Badge group
+<BadgeGroup spacing="loose">
+  <Badge variant="primary">React</Badge>
+  <Badge variant="success">JavaScript</Badge>
+  <Badge variant="info">CSS</Badge>
+</BadgeGroup>
+```
+# How to Use Card
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```
+
+```
