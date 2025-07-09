@@ -2,7 +2,6 @@ Berikut adalah contoh file `README.md` dalam **bahasa Indonesia** yang bisa kamu
 
 ---
 
-````markdown
 # 🎉 SELAMAT DATANG & Terima Kasih atas Dukungannya!
 
 Terima kasih telah mengunjungi proyek ini! Kami sangat menghargai dukungan dan kontribusi Anda.
