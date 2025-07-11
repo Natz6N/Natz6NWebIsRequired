@@ -4,19 +4,19 @@ import AppLayouts from "@/Layouts/appLayouts";
 import Home from "./Pages/Home";
 import NoPages from "@/Pages/NoPages";
 import Browse from "./Pages/Browse";
-import CustomMouse from "./Components/UI/Mouse";
-
+// import CustomMouse from "./Components/UI/Mouse";
+import BackToTopButton from "./Components/UI/BackToTopBtn";
 function App() {
   return (
     <BrowserRouter>
-      <CustomMouse
+      {/* <CustomMouse
         size={30}
         hoverSize={50}
         color="#273F4F"
         mixBlendMode="difference"
         bounceIntensity={0.3}
         bounceDecay={2}
-      />
+      /> */}
       <Routes>
         <Route path="/" element={<AppLayouts />}>
           <Route index element={<Home />} />
@@ -24,6 +24,7 @@ function App() {
           <Route path="*" element={<NoPages />} />
         </Route>
       </Routes>
+      <BackToTopButton />
     </BrowserRouter>
   );
 }

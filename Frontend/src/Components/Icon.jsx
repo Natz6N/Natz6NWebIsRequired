@@ -19,7 +19,7 @@ export const SearchIcon = ({ size = 24, strokeColor = "currentColor" }) => {
     </svg>
   );
 };
-export const Eye = ({size = 24}) => {
+export const Eye = ({ size = 24 }) => {
   return (
     <svg
       width={size}
@@ -81,3 +81,37 @@ export const TandaSeru = ({ size = 24, color = "#000000", ...props }) => {
     </svg>
   );
 };
+export const ChevronDown = ({ color = "#000", size = "24px" }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M6 9L12 15L18 9"
+      stroke={color}
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+export const ChevronUp = ({ color = "#000", size = "24px" }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M18 15L12 9L6 15"
+      stroke={color}
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);

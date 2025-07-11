@@ -2,6 +2,8 @@ import { Eye, Star } from "@/Components/Icon";
 import { Badge } from "@/Components/UI/badge";
 import { DisplayRating } from "@/Components/Ratting";
 import { TandaSeru } from "../Icon";
+import useResponsive from "@/Hook/useResponsive"; // Sesuaikan path
+import Ellipsis from "@/Components/Elipsis";
 // Base Card Component
 const Card = ({
   children,
@@ -207,12 +209,16 @@ const ProductCard = ({
   ...props
 }) => {
   return (
-    <Card className={`max-w-[320px] ${className}`} {...props}>
+    <Card
+      className={`w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-[320px] flex flex-col ${className}`}
+      {...props}
+    >
       <div className="relative group">
         <CardImage
           src={product.image}
           alt={product.name}
           aspectRatio="aspect-square"
+          className="object-cover w-full h-auto"
         />
 
         {/* Quick actions */}
@@ -225,55 +231,41 @@ const ProductCard = ({
           </button>
         </div>
 
-        {/* Sale badge */}
-        {product.sale && (
-          <div className="absolute top-3 left-3">
-            <Badge variant="error">{product.sale}% OFF</Badge>
-          </div>
-        )}
+      
       </div>
 
-      <CardBody className="space-y-3">
+      <CardBody className="space-y-3 flex flex-col justify-between flex-grow p-4">
+        {/* Title & Category */}
         <div>
-          <h3 className="font-semibold text-lg line-clamp-2">{product.name}</h3>
-          <p className="text-gray-600 text-sm">{product.category}</p>
+          <h3 className="font-semibold text-base md:text-lg line-clamp-2">
+            {product.name}
+          </h3>
+          <p className="text-gray-500 text-sm">{product.category}</p>
         </div>
 
         {/* Rating */}
         {product.rating && (
           <div className="flex items-center gap-1">
             <div className="flex">
-              <DisplayRating rating={product.rating} totalStars={5} size={20} />
+              <DisplayRating rating={product.rating} totalStars={5} size={18} />
             </div>
-            <span className="text-sm text-gray-500">({product.reviews})</span>
+            <span className="text-xs md:text-sm text-gray-500">
+              ({product.reviews})
+            </span>
           </div>
         )}
 
-        {/* Price */}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="text-lg font-bold text-gray-900">
-              ${product.price}
-            </span>
-            {product.originalPrice && (
-              <span className="text-sm text-gray-500 line-through">
-                ${product.originalPrice}
-              </span>
-            )}
-          </div>
-        </div>
-
-        {/* Add to cart button */}
-        <div className="flex gap-2 items-center justify-center">
+        {/* Buttons */}
+        <div className="flex flex-col sm:flex-row gap-2 mt-3">
           <button
             onClick={onAddToCart}
-            className="w-fit bg-gray-100 text-white p-2 rounded-md hover:bg-blue-700 transition-colors font-medium"
+            className="flex items-center justify-center bg-gray-200 text-gray-800 py-2 px-3 rounded-md hover:bg-blue-700 hover:text-white transition-colors w-full sm:w-fit"
           >
-            <TandaSeru size={24}/>
+            <TandaSeru size={20} />
           </button>
           <button
-            onClick={onAddToCart}
-            className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors font-medium"
+            onClick={onQuickView}
+            className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors w-full"
           >
             Baca Selengkapnya
           </button>
@@ -336,6 +328,73 @@ const ArticleCard = ({ article, onRead, className = "", ...props }) => {
         </div>
       </CardBody>
     </Card>
+  );
+};
+
+const EventCard = ({
+  date,
+  month,
+  image,
+  title,
+  address,
+  time,
+  description,
+}) => {
+  const { isMobile, isDesktop } = useResponsive();
+  return (
+    <div className="flex px-2 md:px-0 flex-col md:flex-row gap-6 md:gap-10 py-6 border-b">
+      {/* Date */}
+      {isMobile && (
+        <>
+          <div className="w-full justify-between  flex items-center">
+            <div className="flex-shrink-0 text-gray-700 px-4 md:px-0">
+              <div className="text-xs uppercase">{month}</div>
+              <div className="text-3xl font-bold">{date}</div>
+            </div>
+            <h3 className="text-xl font-semibold max-w-[200px] text-gray-800 mb-1">
+              {title}
+            </h3>
+          </div>
+        </>
+      )}
+      {isDesktop && (
+        <>
+          <div className="flex-shrink-0 w-full md:w-20 md:text-center text-gray-700 px-4 md:px-0">
+            <div className="text-xs uppercase">{month}</div>
+            <div className="text-3xl font-bold">{date}</div>
+          </div>
+        </>
+      )}
+      {/* Image */}
+      <div className="w-full md:w-[300px] lg:w-[400px]">
+        <img
+          src={image}
+          alt="Event"
+          className="w-full h-[200px] md:h-full object-cover md:rounded-md"
+        />
+      </div>
+
+      {/* Content */}
+      <div className="flex-1 mt-4 md:mt-0">
+        {isDesktop && (
+          <>
+            <h3 className="text-xl font-semibold max-w-[200px] text-gray-800 mb-1">
+              {title}
+            </h3>
+          </>
+        )}
+        <p className="text-sm md:text-base text-gray-500">{address}</p>
+        <p className="text-sm md:text-base text-gray-500 mb-2">{time}</p>
+
+        <Ellipsis lines={2} showTooltip={false}>
+          <p className="text-sm md:text-base text-gray-600">{description}</p>
+        </Ellipsis>
+
+        <button className="mt-3 text-sm text-blue-600 font-semibold hover:underline">
+          View Event Details →
+        </button>
+      </div>
+    </div>
   );
 };
 
@@ -423,4 +482,5 @@ export {
   CardBody,
   CardFooter,
   CardHeader,
+  EventCard,
 };

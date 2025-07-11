@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Star = ({
   size = 24,
@@ -47,6 +47,32 @@ const Star = ({
     </div>
   );
 };
+
+// Custom hook untuk responsiveness
+const useResponsive = () => {
+  const [isMobile, setIsMobile] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(true);
+
+  useEffect(() => {
+    const checkDevice = () => {
+      const mobile = window.innerWidth <= 768;
+      setIsMobile(mobile);
+      setIsDesktop(!mobile);
+    };
+
+    // Check on mount
+    checkDevice();
+
+    // Add event listener
+    window.addEventListener('resize', checkDevice);
+
+    // Cleanup
+    return () => window.removeEventListener('resize', checkDevice);
+  }, []);
+
+  return { isMobile, isDesktop };
+};
+
 const StarRating = ({
   totalStars = 5,
   size = 32,
@@ -57,6 +83,8 @@ const StarRating = ({
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
 
+  const { isMobile, isDesktop } = useResponsive();
+  
   const handleClick = (starIndex, event) => {
     if (!interactive) return;
 
@@ -132,6 +160,8 @@ const StarRating = ({
 
 // Component untuk menampilkan rating yang sudah ada (read-only)
 const DisplayRating = ({ rating, totalStars = 10, size = 24 }) => {
+  const { isDesktop } = useResponsive();
+
   const getStarFillPercentage = (starIndex, currentRating) => {
     if (currentRating >= starIndex + 1) {
       return 100;
@@ -151,9 +181,13 @@ const DisplayRating = ({ rating, totalStars = 10, size = 24 }) => {
           interactive={false}
         />
       ))}
-      <span className="ml-2 text-sm font-medium text-gray-600">
-        {rating.toFixed(1)}/{totalStars}
-      </span>
+      {isDesktop && 
+        <>
+          <span className="ml-2 text-sm font-medium text-gray-600">
+            {rating.toFixed(1)}/{totalStars}
+          </span>
+        </>
+      }
     </div>
   );
 };

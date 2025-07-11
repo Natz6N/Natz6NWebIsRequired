@@ -1,7 +1,3 @@
-Berikut adalah contoh file `README.md` dalam **bahasa Indonesia** yang bisa kamu sesuaikan untuk proyekmu, baik untuk frontend maupun backend:
-
----
-
 # 🎉 SELAMAT DATANG & Terima Kasih atas Dukungannya!
 
 Terima kasih telah mengunjungi proyek ini! Kami sangat menghargai dukungan dan kontribusi Anda.
@@ -18,12 +14,12 @@ Proyek ini terdiri dari dua bagian utama:
 - **Backend**: Menggunakan [Node.js/Laravel/Express/dll]
 
 ---
-
+<!-- 
 ## 🚀 Cara Menggunakan
+ -->
 
-
-![Frontend](./Frontend/README.md)
-![Backend](./)
+<!-- ![Frontend](./Frontend/README.md)
+![Backend](./) -->
 
 ## 🖼️ Tampilan Antarmuka (UI)
 
@@ -45,8 +41,3 @@ Proyek ini menggunakan lisensi \[MIT/GPL/dll], silakan lihat file `LICENSE` untu
 ## 🔍 Lain-lain
 
 * Dokumentasi API tersedia di: `docs/api.md`
-
----
-
-> Dibuat dengan ❤️ oleh \[Natz6N]
-Kalau kamu punya framework atau library spesifik, tinggal sebutkan saja dan nanti saya bantu sesuaikan juga `README`-nya. Mau dibikin lebih estetik juga bisa, tinggal bilang!
