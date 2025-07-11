@@ -2,7 +2,13 @@ import { ProductCard, EventCard } from "../Components/UI/Card";
 import SwiperCarousel from "../Components/UI/Swiper";
 import WebsiteStats from "../Components/UI/WebState";
 import { SwiperSlide } from "swiper/react";
-import { stats, productData, article, faqData } from "@/Mock/AppMock.js";
+import {
+  stats,
+  article,
+  faqData,
+  EventItems,
+  groupedData,
+} from "@/Mock/AppMock.js";
 import FAQ from "../Components/UI/FAQ";
 export default function Home() {
   return (
@@ -90,11 +96,8 @@ export default function Home() {
         <div className="flex flex-col gap-5 items-center w-full">
           <div className="flex items-center justify-between w-full">
             <h1 className="text-2xl font-bold">My Project</h1>
-            <button>Baca Selengkapnya</button>
+            <button className="cursor-pointer">Lihat Selengkapnya</button>
           </div>
-          <p className="text-gray-600 w-full">
-            Berikut adalah beberapa project yang pernah saya buat...
-          </p>
         </div>
 
         {/* project grid */}
@@ -102,32 +105,32 @@ export default function Home() {
         <div className="grid gap-4 mt-[20px] grid-cols-2 w-full h-fit">
           <div className="block col-span-2 w-full aspect-video">
             <img
-              src="https://i.pinimg.com/736x/5e/a5/bf/5ea5bffb9875a91ae319c9f97b1db65a.jpg"
+              src={`${EventItems[0].img}`}
               className="w-full h-full object-cover"
               alt=""
             />
             <p className="text-sm mt-2 font-semibold md:text-xl">
-              Anime Amv Indo
+              {EventItems[0].Judul}
             </p>
           </div>
           <div className="block w-full aspect-square">
             <img
-              src="https://i.pinimg.com/736x/5e/a5/bf/5ea5bffb9875a91ae319c9f97b1db65a.jpg"
+              src={`${EventItems[1].img}`}
               className="w-full h-full object-cover"
               alt=""
             />
             <p className="text-sm mt-2 font-semibold md:text-xl">
-              Anime Amv Indo
+              {EventItems[1].Judul}
             </p>
           </div>
           <div className="block w-full aspect-square">
             <img
-              src="https://i.pinimg.com/736x/5e/a5/bf/5ea5bffb9875a91ae319c9f97b1db65a.jpg"
+              src={`${EventItems[2].img}`}
               className="w-full h-full object-cover"
               alt=""
             />
             <p className="text-sm mt-2 font-semibold md:text-xl">
-              Anime Amv Indo
+              {EventItems[2].Judul}
             </p>
           </div>
         </div>
@@ -135,74 +138,42 @@ export default function Home() {
         {/* swiper Carousel */}
 
         {/* swiper Carousel AMV*/}
-        <div className="w-full my-[50px] block">
-          <h1 className="text-3xl font-bold">Editing Project</h1>
-          <SwiperCarousel className="mt-[40px]">
-            {productData.map((items, index) => (
-              <SwiperSlide key={index}>
-                <ProductCard
-                  product={items}
-                  onAddToCart={() => alert("Added to cart!")}
-                  onQuickView={() => alert("Quick view opened!")}
-                />
-              </SwiperSlide>
-            ))}
-          </SwiperCarousel>
-        </div>
-
-        {/* Project img swiper GMV */}
-        <div className="w-full my-[50px] block">
-          <h1 className="text-3xl font-bold">Design Graph</h1>
-          <SwiperCarousel className="mt-[40px]">
-            {productData.map((items, index) => (
-              <SwiperSlide key={index}>
-                <ProductCard
-                  product={items}
-                  onAddToCart={() => alert("Added to cart!")}
-                  onQuickView={() => alert("Quick view opened!")}
-                />
-              </SwiperSlide>
-            ))}
-          </SwiperCarousel>
-        </div>
-
-        {/* Project img swiper Website */}
-        <div className="w-full my-[50px] block">
-          <h1 className="text-3xl font-bold">Website Project</h1>
-          <SwiperCarousel className="mt-[40px]">
-            {productData.map((items, index) => (
-              <SwiperSlide key={index}>
-                <ProductCard
-                  product={items}
-                  onAddToCart={() => alert("Added to cart!")}
-                  onQuickView={() => alert("Quick view opened!")}
-                />
-              </SwiperSlide>
-            ))}
-          </SwiperCarousel>
-        </div>
-      </div>
-
-      {/* Article img */}
-      <div className="container">
-        <h1 className="font-bold text-3xl">Article</h1>
-        {article.map((event, index) => (
-          <EventCard key={index} {...event} />
+        {Object.entries(groupedData).map(([category, items]) => (
+          <div key={category} className="w-full my-[50px] block">
+            <h1 className="text-3xl font-bold">{category}</h1>
+            <SwiperCarousel className="mt-[40px]">
+              {items.map((item, index) => (
+                <SwiperSlide key={index}>
+                  <ProductCard
+                    product={item}
+                  />
+                </SwiperSlide>
+              ))}
+            </SwiperCarousel>
+          </div>
         ))}
-      </div>
-      {/* Timeline */}
-      <div className="my-[80px]">
-        <FAQ data={faqData} title="FAQ" allowMultiple={false} />
-      </div>
-      {/* Contact */}
-      {/* Main Content */}
-      <div className="bg-indigo-800 text-white px-6 py-4 md:rounded-lg shadow-md container mt-[20px] w-full mx-auto my-6">
-        <p className="text-lg md:text-base leading-relaxed line-clamp-3">
-          Terima kasih sudah mendukung saya di berbagai platform. Website ini
-          hanya akan menyediakan kebutuhan Anda seperti template dan beberapa
-          tutorial yang mungkin Anda lupa atau belum pelajari. Gunakan dengan
-          bijak, ya!
-        </p>
+
+        {/* Article img */}
+        <div className="container">
+          <h1 className="font-bold text-3xl">Article</h1>
+          {article.map((event, index) => (
+            <EventCard key={index} {...event} />
+          ))}
+        </div>
+        {/* Timeline */}
+        <div className="my-[80px]">
+          <FAQ data={faqData} title="FAQ" allowMultiple={false} />
+        </div>
+        {/* Contact */}
+        {/* Main Content */}
+        <div className="bg-indigo-800 text-white px-6 py-4 md:rounded-lg shadow-md container mt-[20px] w-full mx-auto my-6">
+          <p className="text-lg md:text-base leading-relaxed line-clamp-3">
+            Terima kasih sudah mendukung saya di berbagai platform. Website ini
+            hanya akan menyediakan kebutuhan Anda seperti template dan beberapa
+            tutorial yang mungkin Anda lupa atau belum pelajari. Gunakan dengan
+            bijak, ya!
+          </p>
+        </div>
       </div>
     </div>
   );
